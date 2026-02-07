@@ -1,3 +1,3 @@
-module github.com/mraacus/sgqr-go
+module github.com/mraacus/sgqrgo
 
 go 1.24.2
