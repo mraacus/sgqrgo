@@ -83,8 +83,12 @@ func validateAmountString(s string) error {
 	if s == "" {
 		return fmt.Errorf("non empty amount is required")
 	}
-	if !isFloatString(s) {
+	amount, err := strconv.ParseFloat(s, 64)
+	if err != nil {
 		return fmt.Errorf("amount must be a valid float: %v", s)
+	}
+	if amount < 0 {
+		return fmt.Errorf("amount must be a positive: %v", s)
 	}
 	return nil
 }
@@ -104,11 +108,6 @@ func validateSGQRString(s string) error {
 
 func isNumericString(s string) bool {
 	_, err := strconv.ParseInt(s, 10, 64)
-	return err == nil
-}
-
-func isFloatString(s string) bool {
-	_, err := strconv.ParseFloat(s, 64)
 	return err == nil
 }
 
